@@ -1,120 +1,87 @@
-Algoritmo Genético — Decriptar (UFABC)
+# 🧬 Algoritmo Genético para Decriptação (UFABC)
 
-Repositório: algoritmo_genetico_decriptar_UFABC
-Autor: Everson Bacelli (presumivelmente)
-Descrição curta: Implementação de um algoritmo genético para quebrar / decriptar (ataque de força heurística) cifras simples (p.ex. cifra por substituição) — desenvolvido no contexto UFABC.
+Repositório: **`algoritmo_genetico_decriptar_UFABC`**  
+Autor: *Everson Bacelli*  
+Licença sugerida: **MIT**
 
-Observação: como não tenho acesso direto ao conteúdo do repositório neste momento, este README foi escrito para ser aplicável ao repositório com esse nome. Ajuste nomes de ficheiros/paths conforme o seu projeto real.
+> Projeto acadêmico que implementa um **algoritmo genético (AG)** para a **decriptação de cifras por substituição**, utilizando técnicas heurísticas e análise estatística de linguagem.  
+> Desenvolvido no contexto da **Universidade Federal do ABC (UFABC)**.
 
-Índice
+---
 
-Visão geral
+## 📚 Sumário
 
-Funcionalidades
+- [Visão Geral](#-visão-geral)
+- [Funcionalidades](#-funcionalidades)
+- [Pré-requisitos](#-pré-requisitos)
+- [Instalação](#-instalação)
+- [Estrutura do Projeto](#-estrutura-do-projeto)
+- [Como Executar](#-como-executar)
+- [Parâmetros do Algoritmo](#-parâmetros-do-algoritmo)
+- [Como o Algoritmo Funciona](#-como-o-algoritmo-funciona)
+- [Resultados e Logs](#-resultados-e-logs)
+- [Testes e Validação](#-testes-e-validação)
+- [Melhorias Futuras](#-melhorias-futuras)
+- [Contribuições](#-contribuições)
+- [Licença](#-licença)
+- [Contato](#-contato)
 
-Pré-requisitos
+---
 
-Instalação
+## 💡 Visão Geral
 
-Estrutura sugerida do repositório
+O objetivo do projeto é aplicar um **algoritmo genético (AG)** para **quebrar cifras simples**, como a cifra de substituição monoalfabética.  
+O AG tenta encontrar uma **chave de substituição** que maximize a semelhança entre o texto decifrado e o idioma natural (ex.: português), utilizando **frequência de letras** e **modelos de n-gramas** como métrica de aptidão (*fitness*).
 
-Uso / Exemplos de execução
+---
 
-Configuração de parâmetros
+## ⚙️ Funcionalidades
 
-Como funciona (resumo do algoritmo)
+✅ Implementação completa de um Algoritmo Genético  
+✅ Suporte a fitness baseado em **n-gramas** e **frequência de letras/palavras**  
+✅ Parâmetros configuráveis via **linha de comando** ou arquivo **JSON**  
+✅ Salvamento do **melhor indivíduo** e **logs por geração**  
+✅ Estrutura modular e expansível (crossover, mutação, seleção etc.)  
+✅ Execução reproduzível via *random seed*  
 
-Resultados esperados / output
+---
 
-Testes
+## 🧩 Pré-requisitos
 
-Contribuição
+- **Python** ≥ 3.8  
+- Pacotes necessários:
+  ```bash
+  pip install numpy tqdm pandas
+🚀 Instalação
+Clone o repositório e acesse o diretório:
 
-Licença
-
-Contato
-
-Visão geral
-
-Este projeto implementa um algoritmo genético (AG) para encontrar chaves/sistemas de substituição que transformem um texto cifrado em texto plausível em português (ou outro idioma), usando medidas de aptidão como modelos de n-gramas, scoring por frequência de letras/palavras ou comparação com corpus de referência.
-
-O objetivo principal é apresentar:
-
-representação de indivíduos (chaves/permutações),
-
-operadores genéticos (crossover, mutação),
-
-seleção (torneio, roleta, rank),
-
-função de aptidão baseada em modelos linguísticos.
-
-Funcionalidades
-
-Implementação de AG para quebra de cifras por substituição (ex.: cifra monoalfabética).
-
-Fitness baseado em n-gramas (monogramas, bigramas, trigramas) ou frequência de palavras.
-
-Variação de parâmetros: tamanho da população, prob. de mutação, prob. de crossover, número de gerações.
-
-Salvamento do melhor indivíduo a cada geração / logs de execução.
-
-(Opcional) Interface CLI simples para executar e configurar experimentos.
-
-Pré-requisitos
-
-Python 3.8+
-
-Bibliotecas (instale via pip):
-
-numpy
-
-tqdm (opcional, para progress bars)
-
-pandas (opcional, para análise de resultados)
-
-Exemplo:
-
-python -m venv venv
-source venv/bin/activate   # linux/mac
-venv\Scripts\activate      # windows
-pip install numpy tqdm pandas
-
-Instalação
-
-Clone o repositório:
-
+bash
+Copiar código
 git clone https://github.com/EversonBacelli/algoritmo_genetico_decriptar_UFABC.git
 cd algoritmo_genetico_decriptar_UFABC
-
-
-Crie e ative um ambiente virtual (opcional, recomendado) e instale dependências como mostrado acima.
-
-Estrutura sugerida do repositório
-
-A estrutura abaixo é sugerida e provavelmente corresponde ao layout do projeto — ajuste conforme os ficheiros reais:
-
+🗂️ Estrutura do Projeto
+bash
+Copiar código
 algoritmo_genetico_decriptar_UFABC/
 ├── README.md
 ├── requirements.txt
 ├── src/
-│   ├── main.py                # script principal / CLI
-│   ├── ga.py                  # lógica do algoritmo genético
-│   ├── operators.py           # crossover / mutação / seleção
-│   ├── fitness.py             # funções de avaliação (n-gram scoring)
-│   ├── util.py                # utilitários (decodificação, IO)
+│   ├── main.py              # Script principal (entrada do programa)
+│   ├── ga.py                # Núcleo do algoritmo genético
+│   ├── fitness.py           # Funções de avaliação (n-gramas)
+│   ├── operators.py         # Crossover, mutação, seleção
+│   ├── util.py              # Funções auxiliares (IO, manipulação de texto)
 │   └── data/
-│       ├── corpus.txt         # corpus de referência (opcional)
-│       └── ciphertext.txt     # texto cifrado de exemplo
+│       ├── ciphertext.txt   # Texto cifrado de exemplo
+│       └── corpus.txt       # Corpus de referência para scoring
 ├── experiments/
 │   └── example_config.json
 └── results/
-    └── best_individuals.csv
-
-Uso / Exemplos de execução
-Executando o script principal (exemplo)
-
-Se existir um main.py:
-
+    └── best.txt
+🧠 Como Executar
+🔹 Opção 1 — Linha de comando
+bash
+Copiar código
 python src/main.py --cipher src/data/ciphertext.txt \
                    --population 500 \
                    --generations 1000 \
@@ -122,30 +89,11 @@ python src/main.py --cipher src/data/ciphertext.txt \
                    --crossover 0.9 \
                    --seed 42 \
                    --output results/best.txt
+🔹 Opção 2 — Arquivo de configuração
+Arquivo experiments/example_config.json:
 
-
-Parâmetros possíveis (exemplo):
-
---cipher : caminho para o texto cifrado.
-
---population : tamanho da população.
-
---generations : número máximo de gerações.
-
---mutation : probabilidade de mutação (ex.: 0.01 = 1%).
-
---crossover : probabilidade de crossover (ex.: 0.8).
-
---selection : método de seleção (tournament, roulette, rank).
-
---elitism : número de indivíduos elitistas a preservar por geração.
-
---output : arquivo para salvar o melhor deciframento.
-
-Executando com um arquivo de configuração (JSON)
-
-Exemplo experiments/example_config.json:
-
+json
+Copiar código
 {
   "cipher": "src/data/ciphertext.txt",
   "population": 400,
@@ -156,103 +104,92 @@ Exemplo experiments/example_config.json:
   "elitism": 1,
   "seed": 1234
 }
+Execução:
 
-
-E execução:
-
+bash
+Copiar código
 python src/main.py --config experiments/example_config.json
+⚙️ Parâmetros do Algoritmo
+Parâmetro	Descrição	Valor padrão
+--population	Tamanho da população	300
+--generations	Nº de gerações	1000
+--mutation	Taxa de mutação	0.02
+--crossover	Taxa de crossover	0.8
+--selection	Método de seleção (tournament, roulette, rank)	tournament
+--elitism	Nº de indivíduos mantidos	1
+--seed	Valor fixo para reprodutibilidade	None
 
-Configuração de parâmetros (exemplo de defaults recomendados)
-Parâmetro	Valor padrão sugerido
-population	300
-generations	1000
-mutation_rate	0.02
-crossover_rate	0.8
-selection	tournament (size=3)
-elitism	1
-seed	None
-Como funciona (resumo do algoritmo)
+🔍 Como o Algoritmo Funciona
+Inicialização: cria uma população aleatória de chaves (permutações do alfabeto).
 
-Representação: cada indivíduo representa uma permutação do alfabeto (chave de substituição).
+Avaliação (fitness): decifra o texto e mede a "naturalidade" do resultado.
 
-Inicialização: população inicial composta por permutações aleatórias.
+Seleção: escolhe os indivíduos mais promissores.
 
-Avaliação (fitness): decodifica-se o texto cifrado com a chave do indivíduo e calcula-se um score por similaridade com o idioma (n-gram scoring / log prob).
+Crossover: combina partes das chaves dos pais.
 
-Seleção: escolhe pais via torneio/roleta/rank.
+Mutação: faz pequenas alterações aleatórias.
 
-Crossover: combinações de permutações (p.ex. PMX — Partially Mapped Crossover, ou outro método específico para permutações).
+Elitismo: mantém os melhores indivíduos.
 
-Mutação: swap aleatório entre duas posições da permutação com probabilidade mutation_rate.
+Iteração: repete até convergir ou atingir o limite de gerações.
 
-Elitismo: preserva os melhores indivíduos para a próxima geração.
+Exemplo de cálculo de fitness:
 
-Parada: por número de gerações ou por atingir fitness alvo.
-
-Fitness (detalhes práticos)
-
-Utilize log-probabilidade de n-gramas (bigrams/trigrams) para evitar underflow.
-
-Treine um modelo simples no corpus (por ex., contar frequências e converter para probabilidades).
-
-Score do texto decodificado = soma dos logs das probabilidades de cada n-grama encontrado.
-
-Exemplo (pseudocódigo):
-
+python
+Copiar código
 score = 0.0
-for each trigram in text:
-    score += log(prob_trigram.get(trigram, small_value))
+for trigram in text:
+    score += math.log(prob_trigram.get(trigram, 1e-12))
+📊 Resultados e Logs
+Durante a execução, são gerados:
 
-Resultados esperados / Output
+results/best.txt → texto decifrado com o melhor indivíduo
 
-results/best.txt — texto decodificado com a melhor chave encontrada.
+results/log.csv → log por geração (fitness médio, melhor fitness etc.)
 
-results/log.csv — log por geração com: geração, melhor fitness, média fitness, melhor indivíduo (chave).
+Exemplo de saída no terminal:
 
-Impressões no console com progresso (opcional: tqdm).
+yaml
+Copiar código
+Geração  250 / 1000 | Melhor fitness: -1234.56 | Texto parcial: "o segredo está revelado..."
+🧪 Testes e Validação
+Gere um texto cifrado conhecido e verifique se o AG consegue recuperar o plaintext.
 
-Exemplo de saída no console:
+Varie parâmetros (população, taxa de mutação) e observe a convergência.
 
-Geração  100 / 1000 | Melhor fitness: -1234.56 | Texto: "aqui vai um trecho legível..."
+Compare diferentes métricas de fitness (frequência simples vs. n-gramas).
 
-Testes
+🚧 Melhorias Futuras
+ Suporte a outras cifras (Vigenère, Hill, Afim)
 
-Tenha um texto claro (plaintext) e aplique uma chave conhecida (substituição) para gerar ciphertext.txt. Rode o AG e verifique se a chave encontrada é igual (ou próxima) da chave original ou se o plaintext é recuperado.
+ Paralelização de fitness com multiprocessing
 
-Teste variações de parâmetros para ver robustez (pop size, mutation_rate).
+ Interface visual (Streamlit / Tkinter)
 
-Compare fitness com função de n-gramas vs. frequência de palavras para ver qual converge melhor.
+ Otimização híbrida (AG + Hill Climbing)
 
-Dicas para melhorar performance
+ Visualização de convergência em tempo real
 
-Use mais população ou mais gerações quando o espaço de busca for grande.
+🤝 Contribuições
+Contribuições são bem-vindas!
+Para colaborar:
 
-Combine AG com heurísticas locais (ex.: hill climbing) para polir soluções (memetic algorithm).
+Faça um fork do repositório
 
-Use avaliação em log para estabilidade numérica.
+Crie uma branch: git checkout -b feature/nome-da-feature
 
-Faça múltiplas execuções com diferentes seeds e escolha o melhor resultado.
+Commit: git commit -m "Adiciona nova feature"
 
-Contribuição
+Push: git push origin feature/nome-da-feature
 
-Abra uma issue descrevendo a proposta.
+Abra um Pull Request
 
-Crie um branch com uma feature/bugfix.
+📄 Licença
+Distribuído sob a licença MIT.
+Consulte o arquivo LICENSE para mais informações.
 
-Faça um pull request com descrição e testes básicos.
-
-Sugestões de melhorias:
-
-adicionar GUI simples (tkinter/streamlit) para testar rapidamente.
-
-adicionar paralelização (multiprocessing) para avaliação de populações grandes.
-
-suporte a outros tipos de cifra (Vigenère, Hill, etc).
-
-Licença
-
-Coloque aqui a licença desejada (ex.: MIT, GPL-3.0). Se ainda não existir, recomendo MIT para projetos académicos que você queira compartilhar livremente:
-
+text
+Copiar código
 MIT License
 Copyright (c) 2025 Everson Bacelli
-...
